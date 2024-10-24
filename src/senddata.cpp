@@ -48,6 +48,9 @@ void SendPayload(uint8_t port) {
 #if (HAS_LORA)
   lora_enqueuedata(&SendBuffer);
 #endif
+#if (HAS_LORA_P2P)
+  lora_p2p_enqueuedata(&SendBuffer);
+#endif
 #ifdef HAS_SPI
   spi_enqueuedata(&SendBuffer);
 #endif
@@ -188,6 +191,9 @@ void flushQueues(void) {
 #if (HAS_LORA)
   lora_queuereset();
 #endif
+#if (HAS_LORA_P2P)
+  lora_p2p_queuereset();
+#endif
 #ifdef HAS_SPI
   spi_queuereset();
 #endif
@@ -200,6 +206,9 @@ bool allQueuesEmtpy(void) {
   uint32_t rc = rcmd_queuewaiting();
 #if (HAS_LORA)
   rc += lora_queuewaiting();
+#endif
+#if (HAS_LORA_P2P)
+  rc += lora_p2p_queuewaiting();
 #endif
 #ifdef HAS_SPI
   rc += spi_queuewaiting();

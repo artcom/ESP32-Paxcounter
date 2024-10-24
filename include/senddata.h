@@ -6,6 +6,7 @@
 #include "cyclic.h"
 #include "sensor.h"
 #include "lorawan.h"
+#include "lorap2p.h"
 #include "display.h"
 #include "sdcard.h"
 #include "payload.h"

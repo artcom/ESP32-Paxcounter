@@ -351,6 +351,12 @@ void setup() {
   _ASSERT(lmic_init() == ESP_OK);
 #endif
 
+// initialize LoRa
+#if (HAS_LORA_P2P)
+  strcat_P(features, " LORA_P2P");
+  _ASSERT(lora_p2p_init() == ESP_OK);
+#endif
+
 // initialize SPI
 #ifdef HAS_SPI
   strcat_P(features, " SPI");
