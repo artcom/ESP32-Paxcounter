@@ -54,11 +54,13 @@ void lora_p2p_task(void *param) {
       messageInt = (messageInt << 8) | msg.Message[i];
     }
 
-    Serial.printf("Sending count: %lu\n", messageInt);
+    String jsonMessage = "{\"deviceId\":\"" + String(DEVICE_ID) + "\",\"payload\":" + String(messageInt) + "}";
+
+    Serial.println(jsonMessage.c_str());
 
     // send packet
     LoRa.beginPacket();
-    LoRa.print(messageInt);
+    LoRa.print(jsonMessage);
     LoRa.endPacket();
 
     xQueueReceive(LoraP2PSendQueue, &msg, (TickType_t)0);
